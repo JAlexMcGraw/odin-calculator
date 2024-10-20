@@ -8,29 +8,39 @@
 </head>
 <body>
     <div id="display">
-        <textarea id="display-text">
-
-        </textarea>
+        <p id="display-text">
+            12335
+        </p>
     </div>
-    <div id="numbers">
-        <button id="nine" class="number"></button>
-        <button id="eight" class="number"></button>
-        <button id="seven" class="number"></button>
-        <button id="six" class="number"></button>
-        <button id="five" class="number"></button>
-        <button id="four" class="number"></button>
-        <button id="three" class="number"></button>
-        <button id="two" class="number"></button>
-        <button id="one" class="number"></button>
-        <button id="zero" class="number"></button>
-        <button id="period" class="number"></button>
-        <button id="equals" class="number"></button>
-    </div>
-    <div id="operators">
-        <button id="plus" class="operator"></button>
-        <button id="minus" class="operator"></button>
-        <button id="multiply" class="operator"></button>
-        <button id="divide" class="operator"></button>
+    <div id="button-components">
+        <div id="numbers">
+            <div id="top-numbers" class="sub-row">
+                <button id="nine" class="number">9</button>
+                <button id="eight" class="number">8</button>
+                <button id="seven" class="number">7</button>
+            </div>
+            <div id="top-middle-numbers" class="sub-row">
+                <button id="six" class="number">6</button>
+                <button id="five" class="number">5</button>
+                <button id="four" class="number">4</button>
+            </div>
+            <div id="bottom-middle-numbers" class="sub-row">
+                <button id="three" class="number">3</button>
+                <button id="two" class="number">2</button>
+                <button id="one" class="number">1</button>
+            </div>
+            <div id="bottom-numbers" class="sub-row">
+                <button id="period" class="number">.</button>
+                <button id="zero" class="number">0</button>
+                <button id="equals" class="number">=</button>
+            </div>
+        </div>
+        <div id="operators">
+            <button id="plus" class="operator">+</button>
+            <button id="minus" class="operator">-</button>
+            <button id="multiply" class="operator">*</button>
+            <button id="divide" class="operator">÷</button>
+        </div>
     </div>
     
 </body>

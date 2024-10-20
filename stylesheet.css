@@ -1,0 +1,71 @@
+#display {
+    display: flex;
+    color: white;
+    background-color: gray;
+    justify-content: flex-end;
+    align-content: flex-end;
+    border: 1px solid black;
+}
+
+#display p {
+    width: 100%;
+    max-height: 40px;
+    text-align: right;
+    font-size: 10vh;
+}
+
+#button-components {
+    display: flex;
+    height: 90vh;
+    justify-content: space-between;
+}
+
+#numbers {
+    display: flex;
+    flex-direction: column;
+    width: 80vh;
+}
+
+#top-numbers {
+    flex: 1 0 0;
+}
+
+#top-middle-numbers {
+    flex: 1 0 0;
+}
+
+#bottom-middle-numbers {
+    flex: 1 0 0;
+}
+
+#bottom-numbers {
+    flex: 1 0 0;
+}
+
+#operators {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 20vh;
+}
+
+.operator {
+    height: 95%;
+    margin-bottom: 10px;
+}
+
+button {
+    flex: 1 0 0; 
+}
+
+.number {
+    flex: 1 0 0;
+    height: 95%;
+    width: calc(95%/3);
+    margin: 0 3px 3px 3px;
+}
+
+#top-numbers,
+#plus {
+    margin-top: 3px;
+}
