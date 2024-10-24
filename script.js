@@ -6,36 +6,78 @@ const display = document.querySelector('#display-text');
 let valuesAndOperators = [];
 
 const buttons = ["9", "8", "7", "6", "5", "4", "3", "2", "1", "0",
-".", "=", "+", "-", "*", "÷", "C"]
+".", "=", "+", "-", "*", "/", "C"]
 
-const operators = ["=", "+", "-", "*", "÷", "C"]
+const operators = ["=", "+", "-", "*", "/", "C"]
 
 let currentValue = "";
 
-let answer = 0;
+let answer;
 
 function selectNumber(value) {
+    console.log(`valuesAndOperators length: ${valuesAndOperators.length}`);
+    if (value === "C") {
+        currentValue = "";
+        answer = 0;
+        valuesAndOperators = [];
+        updateDisplay();
+        return
+    } else if (value === "=" && valuesAndOperators.length < 3) {
+        alert("Need to provide some values to calculate! Resetting...");
+        currentValue = "";
+        answer = 0;
+        valuesAndOperators = [];
+        updateDisplay();
+        return
+    } else if (value === "=") {
+        checkZeroDiv = checkIfZeroDivision(valuesAndOperators);
+        if (checkZeroDiv) {
+            currentValue = "";
+            answer = 0;
+            valuesAndOperators = [];
+            updateDisplay();
+            return
+        }
+    }
     // convert to decimal if it is a number
+    console.log(`value selected: ${value}`);
+    console.log(`currentValue at beginning: ${currentValue}`);
     if (!isNaN(value) || value === '.') {
         currentValue += value;
 
-        valuesAndOperators[valuesAndOperators.length - 1] = currentValue;
+        if (!["+", "-", "*", "/"].includes(valuesAndOperators[valuesAndOperators.length - 1])) {
+            valuesAndOperators[valuesAndOperators.length - 1] = currentValue;
+        } else {
+            valuesAndOperators.push(currentValue);
+        }
         
     } else {
+        const logic = (operator) => ["+", "-", "*", "/"].includes(operator);
+        if (valuesAndOperators.some(logic)) {
+            // console.log(`second operator: ${value}`);
+            midwayAnswer = calculateExpression(valuesAndOperators);
+            valuesAndOperators = [];
+            valuesAndOperators.push(midwayAnswer);
+            updateDisplay();
+            valuesAndOperators.push(value);
+            currentValue = "";
+            // console.log(`vals and ops: ${valuesAndOperators}`);
+            return
+        }
         // if the current value is not an empty string, then push it to the array. If it is none,
         // then keep the empty string.
-        currentValue !== "" ? valuesAndOperators.push(currentValue) : "";
-        console.log(`value ${value}`);
+        currentValue !== "" && value !== "=" ? valuesAndOperators.push(currentValue) : "";
+
         currentValue = value;
         // If the last value is not an operator (it is a number or period), then push the new operator
-        // THIS IS NOT QUITE WORKING. LOOK AT LOGS TO SEE WHAT IS HAPPENING AND FIX
         if (currentValue === "=") {
+          
             answer = calculateExpression(valuesAndOperators);
-            console.log(`values and operators: ${valuesAndOperators}`);
-            console.log(`Final output: ${answer}`);
-            return
+            // console.log(`values and operators at equals: ${valuesAndOperators}`);
+            valuesAndOperators.push(answer);
+            // return
         } else if (!operators.includes(valuesAndOperators[valuesAndOperators.length - 1])) {
-            console.log(`pushing currentValue: ${currentValue}`);
+            // console.log(`pushing currentValue bc of operator: ${currentValue}`);
             valuesAndOperators.push(currentValue);
             valuesAndOperators.push("");
         // If the last value of the array is an operator, then replace the last value of the array
@@ -43,13 +85,14 @@ function selectNumber(value) {
             valuesAndOperators[valuesAndOperators.length - 1] = currentValue;
         }
         currentValue = "";
+        // console.log(`currentValue at end of else: ${currentValue}`);
     }
 
 
 
-    console.log(`currentValue: ${currentValue}`)
-    console.log(`valuesAndOperators: ${valuesAndOperators}`)
-    updateDisplay()
+    console.log(`currentValue at end: ${currentValue}`)
+    console.log(`valuesAndOperators at end: ${valuesAndOperators}`)
+    updateDisplay();
     // keep value if it is a symbol
     // return value
 }
@@ -59,6 +102,15 @@ function selectNumber(value) {
 function updateDisplay() {
     let lastValue = valuesAndOperators[valuesAndOperators.length - 1];
     display.textContent = lastValue;
+}
+
+function checkIfZeroDivision(array) {
+    if (array[array.length - 2] === "/" && array[array.length - 1] === "0") {
+        alert("Don't divide by 0 silly!");
+        valuesAndOperators.pop();
+        currentValue = "";
+        return true
+    }
 }
 
 // Call this when "=" is clicked
@@ -71,7 +123,7 @@ function calculateExpressionMine(array) {
     var math_it_up = {
         '+': function (x, y) { return x + y },
         '-': function (x, y) { return x - y },
-        '÷': function (x, y) { return x / y }, 
+        '/': function (x, y) { return x / y }, 
         "*": function (x, y) { return x * y }
     }
 
@@ -88,7 +140,7 @@ function calculateExpressionMine(array) {
 buttons.forEach(button => {
     // console.log(`button: ${button}`)
     const btn = document.querySelector(`[id='${button}']`)
-    console.log(btn)
+    // console.log(btn)
     btn.addEventListener('click', () => selectNumber(button))
 });
 

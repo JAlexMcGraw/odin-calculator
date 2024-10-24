@@ -1,7 +1,19 @@
+body {
+    margin: 80%;
+    width: 80%;
+    max-width: 700px;
+    max-height: 400px;
+    height: 40vh;
+    /* overflow: hidden; */
+    box-sizing: border-box;
+    margin: 0 auto;
+}
+  
+
 #display {
     display: flex;
     color: white;
-    background-color: gray;
+    background-color: lightgray;
     justify-content: flex-end;
     align-content: flex-end;
     border: 1px solid black;
@@ -9,19 +21,20 @@
 
 #display p {
     width: 100%;
-    max-height: 40px;
+    max-height: 10px;
     text-align: right;
     font-size: 10vh;
 }
 
 #button-components {
     display: flex;
-    height: 90vh;
+    height: 75vh;
     justify-content: space-between;
 }
 
 #numbers {
     display: flex;
+    flex: 3;
     flex-direction: column;
     width: 80vh;
 }
@@ -44,6 +57,7 @@
 
 #operators {
     display: flex;
+    flex: 1;
     flex-direction: column;
     justify-content: space-evenly;
     width: 20vh;
@@ -52,6 +66,8 @@
 .operator {
     height: 95%;
     margin-bottom: 10px;
+    background-color: orange;
+    font-size: xx-large;
 }
 
 button {
@@ -63,9 +79,19 @@ button {
     height: 95%;
     width: calc(95%/3);
     margin: 0 3px 3px 3px;
+    font-size: xx-large;
+    background-color: beige;
 }
 
 #top-numbers,
 #plus {
     margin-top: 3px;
+}
+
+#\+ {
+    margin-top: 3px;
+}
+
+button:active{
+    background-color: azure;
 }
